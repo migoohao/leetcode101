@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 class Solution {
     public int numberOfArithmeticSlices(int[] A) {
         if (A == null || A.length < 3) {
