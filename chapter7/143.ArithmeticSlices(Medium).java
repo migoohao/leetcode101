@@ -9,10 +9,6 @@ class Solution {
                 dp[i] = dp[i - 1] + 1;
             }
         }
-        int result = 0;
-        for (int i = 0; i < dp.length; i++) {
-            result += dp[i];
-        }
-        return result;
+        return Arrays.stream(dp).sum();
     }
 }
