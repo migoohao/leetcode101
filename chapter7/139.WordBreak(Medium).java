@@ -4,9 +4,12 @@ class Solution {
         boolean[] dp = new boolean[s.length() + 1];
         dp[0] = true;
         for (int i = 0; i < s.length(); i++) {
-            for (int j = i; j >= 0 && dp[j] && words.contains(s.substring(j, i + 1)); j--) {
-                dp[i + 1] = true;
-                break;
+            for (String word : wordDict) {
+                int start = i - word.length() + 1;
+                if (start >= 0 && dp[start] && s.substring(start, i + 1).equals(word)) {
+                    dp[i+1] = true;
+                    break;
+                }
             }
         }
         dp[0] = false;
