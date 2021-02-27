@@ -4,11 +4,12 @@ class Solution {
             return 0;
         }
         int[] dp = new int[nums.length];
+        Arrays.fill(dp, Integer.MAX_VALUE);
         int size = 0;
         for (int i = 0; i < nums.length; i++) {
-            int index = binarySearchFirstLower(arr, size, nums[i]) + 1;
+            int index = binarySearchFirstLower(dp, size, nums[i]) + 1;
             size = Math.max(size, index + 1);
-            dp[index] = Math.max(dp[index], nums[i]);
+            dp[index] = Math.min(dp[index], nums[i]);
         }
         return size;
     }
@@ -27,6 +28,6 @@ class Solution {
                 break;
             }
         }
-        return start - 1;
+        return (start == end || arr[start] >= target) ? start - 1 : start;
     }
 }
