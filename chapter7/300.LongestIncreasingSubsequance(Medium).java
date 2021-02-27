@@ -4,16 +4,29 @@ class Solution {
             return 0;
         }
         int[] dp = new int[nums.length];
-        Arrays.fill(dp, 1);
-        int result = 1;
-        for (int i = 1; i < nums.length; i++) {
-            for (int j = 0; j < i; j ++) {
-                if (nums[j] < nums[i]) {
-                    dp[i] = Math.max(dp[j] + 1, dp[i]);
-                }
-            }
-            result = Math.max(result, dp[i]);
+        int size = 0;
+        for (int i = 0; i < nums.length; i++) {
+            int index = binarySearchFirstLower(arr, size, nums[i]) + 1;
+            size = Math.max(size, index + 1);
+            dp[index] = Math.max(dp[index], nums[i]);
         }
-        return result;
+        return size;
+    }
+    private int binarySearchFirstLower(int[] arr, int size, int target) {
+        int start = 0;
+        int end = size;
+        int mid;
+        while (start < end) {
+            mid = (start + end) / 2;
+            if (arr[mid] < target) {
+                start = mid + 1;
+            } else if (arr[mid] > target) {
+                end = mid;
+            } else {
+                start = mid;
+                break;
+            }
+        }
+        return start - 1;
     }
 }
